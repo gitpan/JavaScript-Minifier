@@ -1,10 +1,25 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         JavaScript-Minifier
-version:      1.05
-version_from: lib/JavaScript/Minifier.pm
-installdirs:  site
+---
+abstract: 'Perl extension for minifying JavaScript code'
+author:
+  - 'Zoffix Znet <zoffix@cpan.org>'
+build_requires:
+  Test::More: 0
+configure_requires:
+  Module::Build: 0
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4204, CPAN::Meta::Converter version 2.132830'
+license: artistic_2
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: JavaScript-Minifier
+provides:
+  JavaScript::Minifier:
+    file: lib/JavaScript/Minifier.pm
+    version: 1.06
 requires:
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.30_01
+  Exporter: 5.64_03
+  perl: 5.006
+resources:
+  license: http://www.perlfoundation.org/artistic_license_2_0
+version: 1.06

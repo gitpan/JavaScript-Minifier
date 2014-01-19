@@ -5,50 +5,38 @@ use warnings;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT_OK = qw(minify);
+our @EXPORT = qw(minify);
 
-our $VERSION = '1.05';
-
-# -----------------------------------------------------------------------------
+our $VERSION = '1.06';
 
 #return true if the character is allowed in identifier.
 sub isAlphanum {
-  my $x = shift;
-  return ($x =~ /[\w\$\\]/ || ord($x) > 126);
-}
-
-sub isSpace {
-  my $x = shift;
-  return ($x eq ' ' || $x eq "\t");
+  return ($_[0] =~ /[\w\$\\]/ || ord($_[0]) > 126);
 }
 
 sub isEndspace {
-  my $x = shift;
-  return ($x eq "\n" || $x eq "\r" || $x eq "\f");
+  return ($_[0] eq "\n" || $_[0] eq "\r" || $_[0] eq "\f");
 }
 
 sub isWhitespace {
-  my $x = shift;
-  return (isSpace($x) || isEndspace($x));
+    return ($_[0] eq ' ' || $_[0] eq "\t" || $_[0] eq "\n"
+        || $_[0] eq "\r" || $_[0] eq "\f");
 }
 
 # New line characters before or after these characters can be removed.
 # Not + - / in this list because they require special care.
 sub isInfix {
-  my $x = shift;
-  $x =~ /[,;:=&%*<>\?\|\n]/;
+  $_[0] =~ /[,;:=&%*<>\?\|\n]/;
 }
 
 # New line characters after these characters can be removed.
 sub isPrefix {
-  my $x = shift;
-  return ($x =~ /[\{\(\[!]/ || isInfix($x));
+  return ($_[0] =~ /[\{\(\[!]/ || isInfix($_[0]));
 }
 
 # New line characters before these characters can removed.
 sub isPostfix {
-  my $x = shift;
-  return ($x =~ /[\}\)\]]/ || isInfix($x));
+  return ($_[0] =~ /[\}\)\]]/ || isInfix($_[0]));
 }
 
 # -----------------------------------------------------------------------------
@@ -354,16 +342,14 @@ sub minify {
   
 } # minify()
 
-# -----------------------------------------------------------------------------
-
 1;
 __END__
 
+=encoding utf8
 
 =head1 NAME
 
 JavaScript::Minifier - Perl extension for minifying JavaScript code
-
 
 =head1 SYNOPSIS
 
@@ -390,7 +376,6 @@ To treat ';;;' as '//' so that debugging code can be removed. This is a common J
 
 The "input" parameter is manditory. The "output", "copyright", and "stripDebug" parameters are optional and can be used in any combination.
 
-
 =head1 DESCRIPTION
 
 This module removes unnecessary whitespace from JavaScript code. The primary requirement developing this module is to not break working code: if working JavaScript is in input then working JavaScript is output. It is ok if the input has missing semi-colons, snips like '++ +' or '12 .toString()', for example. Internet Explorer conditional comments are copied to the output but the code inside these comments will not be minified.
@@ -399,30 +384,25 @@ The ECMAScript specifications allow for many different whitespace characters: sp
 
 For static JavaScript files, it is recommended that you minify during the build stage of web deployment. If you minify on-the-fly then it might be a good idea to cache the minified file. Minifying static files on-the-fly repeatedly is wasteful.
 
-
 =head2 EXPORT
 
-None by default.
-
-Exportable on demand: minifiy()
-
+Exported by default: C<minifiy()>
 
 =head1 SEE ALSO
-
-This project is developed using an SVN repository. To check out the repository
-svn co http://dev.michaux.ca/svn/random/JavaScript-Minifier
 
 This module is inspired by Douglas Crockford's JSMin:
 http://www.crockford.com/javascript/jsmin.html
 
 You may also be interested in the CSS::Minifier module also available on CPAN.
 
+=head1 MAINTAINER
+
+Zoffix Znet C<< <zoffix@cpan.org> >> L<https://metacpan.org/author/ZOFFIX>
 
 =head1 AUTHORS
 
 Peter Michaux, E<lt>petermichaux@gmail.comE<gt>
 Eric Herrera, E<lt>herrera@10east.comE<gt>
-
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -431,3 +411,4 @@ Copyright (C) 2007 by Peter Michaux
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.6 or,
 at your option, any later version of Perl 5 you may have available.
+
