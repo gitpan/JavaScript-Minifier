@@ -7,7 +7,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(minify);
 
-our $VERSION = '1.06';
+our $VERSION = '1.08';
 
 #return true if the character is allowed in identifier.
 sub isAlphanum {
@@ -43,12 +43,18 @@ sub isPostfix {
 
 sub _get {
   my $s = shift;
+  
   if ($s->{inputType} eq 'file') {
-    return getc($s->{input});
+    my $char = getc($s->{input});
+    $s->{last_read_char} = $char
+      if defined $char;
+
+    return $char;
   }
   elsif ($s->{inputType} eq 'string') {
     if ($s->{'inputPos'} < length($s->{input})) {
-      return substr($s->{input}, $s->{inputPos}++, 1);
+      return $s->{last_read_char}
+        = substr($s->{input}, $s->{inputPos}++, 1);
     }
     else { # Simulate getc() when off the end of the input string.
       return undef;
@@ -334,6 +340,10 @@ sub minify {
       action1($s);
       skipWhitespace($s);
     }
+  }
+  
+  if ( $s->{last_read_char} =~ /\n/ ) {
+    _put($s, "\n");
   }
   
   if (!defined($s->{outfile})) {
