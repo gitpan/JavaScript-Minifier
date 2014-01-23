@@ -14,4 +14,7 @@ meta-spec:
 name: JavaScript-Minifier
 requires:
   Exporter: 5.64_03
-version: 1.08
+resources:
+  bugtracker: https://github.com/zoffixznet/JavaScript-Minifier/issues
+  repository: git://github.com/zoffixznet/JavaScript-Minifier.git
+version: 1.09

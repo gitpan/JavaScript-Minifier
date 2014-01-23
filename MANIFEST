@@ -56,6 +56,8 @@ t/scripts/s8.js
 t/scripts/s9-expected.js
 t/scripts/s9-got.js
 t/scripts/s9.js
+temp/jquery-1.3.2.js
+temp/output.js
 temp/test.pl
 xt/kwalitee.t
 xt/pod-coverage.t
