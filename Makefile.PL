@@ -23,8 +23,10 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Exporter" => "5.64_03"
   },
-  "TEST_REQUIRES" => {},
-  "VERSION" => "1.09",
+  "TEST_REQUIRES" => {
+    "Test::More" => "0.88"
+  },
+  "VERSION" => "v1.10",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -32,7 +34,8 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Exporter" => "5.64_03"
+  "Exporter" => "5.64_03",
+  "Test::More" => "0.88"
 );
 
 
