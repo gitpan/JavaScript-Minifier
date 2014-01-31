@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-
+use 5.006;
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -21,12 +21,17 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "JavaScript::Minifier",
   "PREREQ_PM" => {
-    "Exporter" => "5.64_03"
+    "Exporter" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "Test::More" => "0.88"
+    "File::Spec" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
+    "Test::More" => 0
   },
-  "VERSION" => "v1.10",
+  "VERSION" => "1.11",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -34,8 +39,13 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Exporter" => "5.64_03",
-  "Test::More" => "0.88"
+  "Exporter" => 0,
+  "File::Spec" => 0,
+  "IO::Handle" => 0,
+  "IPC::Open3" => 0,
+  "Test::More" => 0,
+  "strict" => 0,
+  "warnings" => 0
 );
 
 
