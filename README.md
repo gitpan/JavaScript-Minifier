@@ -62,6 +62,10 @@ Zoffix Znet `<zoffix@cpan.org>` [https://metacpan.org/author/ZOFFIX](https://met
 Peter Michaux, <petermichaux@gmail.com>
 Eric Herrera, <herrera@10east.com>
 
+# CONTRIBUTORS
+
+Miller 'tmhall' Hall (bug fixes)
+
 # COPYRIGHT AND LICENSE
 
 Copyright (C) 2007 by Peter Michaux
